@@ -1,0 +1,13 @@
+{% extends "base.twig" %}
+
+{% block head %}
+{{ parent() }}
+<style type="text/css">
+    .important { color: red; }
+</style>
+{% endblock %}
+{% block content %}
+    <p>ついかmae</p>
+    {{ parent() }}
+    <p>ついか</p>
+{% endblock %}

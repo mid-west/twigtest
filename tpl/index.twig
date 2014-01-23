@@ -1,0 +1,187 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="shortcut icon" href="/img/favicon.png">
+<title>Theme Template for Bootstrap</title>
+<!-- Bootstrap core CSS -->
+<link href="/css/bootstrap.css" rel="stylesheet">
+<!-- Bootstrap theme -->
+<link href="/css/bootstrap-theme.min.css" rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link href="theme.css" rel="stylesheet">
+
+<!-- Just for debugging purposes. Don't actually copy this line! -->
+<!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+<![endif]-->
+</head>
+
+<body>
+
+{% include 'gnav.twig' %}
+
+
+<div class="container theme-showcase">
+
+<div class="well">
+<h2>代入</h2>
+{% set foo1 = 'foo' %}
+{% set foo2 = [1, 2] %}
+{% set foo3 = {'foo': 'bar'} %}
+    <br />
+{{ foo1 }}<br />
+{{ foo2.1 }}<br />
+{{ foo3.foo }}
+</div>
+
+<div class="well">
+    <h2>フィルタ</h2>
+    {{ name|striptags|title }}<br />
+    {{ name|title|striptags}}<br />
+    {{ name|title }}<br />
+    <br />
+    {{ value2|join('-') }}      {# 配列を連結 #}
+    <br />
+
+    {# 大文字に変換(コードの領域にフィルタを適用) #}
+    {% filter upper %}
+    <p>abcdefg</p>
+    {% endfilter %}
+
+</div>
+
+<div class="well">
+    <h2>制御構文</h2>
+    {% if value1|length > 1 %}
+    if文の中
+    {% elseif value1|length > 2 %}
+    elseの中
+    {% endif %}
+
+    <ul><!-- for構文？？ -->
+
+    </ul>
+</div>
+
+<div class="well">
+    <h2>escape</h2>
+    {% autoescape %}
+    <p>Everything will be automatically escaped in this block (using the HTML strategy)</p>
+    {% endautoescape %}
+
+</div>
+
+<div class="well">
+    <h2>Macros</h2>
+    ???????????????
+
+</div>
+
+
+<div class="well">
+    <h2>Expressions</h2>
+    {% set foo = [1, {"foo": "bar"}] %}
+    {{ foo }}<br />
+    {{ foo.0 }}<br />
+    {{ foo.1.foo }}<br />
+
+</div>
+
+<div class="well">
+    <h2>Math</h2>
+    {{ 1 + 1 }}<br />
+    {{ 3-2 }}<br />
+    {{ 11%7 }}<br />
+
+</div>
+
+<div class="well">
+    <h2>Comparisons</h2>
+    {% if 'Fabien' starts with 'F' %}
+    START!!
+    {% endif %}
+    {% if 'Fabien' ends with 'n' %}
+    END!!!
+    {% endif %}
+
+    {% set phone = '03-' %}
+    {% if phone matches '{^[\d\.]+$}' %}
+    マッチ！ <!-- 正規表現 要確認 -->
+    {% endif %}
+</div>
+
+<div class="well">
+    <h2>Containment Operator</h2>
+    {# returns true #}
+    {{ 1 in [1, 2, 3] }}
+    {{ 'cd' in 'abcde' }}<br />
+
+    negative test<!-- 文法違う？ 要確認 -->
+    {{ 1 not in [2, 3] }}
+
+</div>
+
+<div class="well">
+    <h2>Test Operator</h2>
+    {# find out if a variable is odd #}
+    {{ 7 is odd }}
+
+</div>
+
+<div class="well">
+    <h2>String Interpolation</h2>
+    <!-- 途中で式の評価を行う -->
+    {% set bar = 'rab' %}
+    {{ "foo #{bar} baz" }}<br />
+    {{ "foo #{1 + 2} baz" }}
+</div>
+
+<div class="well">
+    <h2>Whitespace Control</h2>
+    {% spaceless %}
+    <div>
+        <strong>foo bar</strong>
+    </div>
+    {% endspaceless %}
+
+    <!-- spacelessがない場合↓ -->
+    <div>
+        <strong>foo bar bar</strong>
+    </div>
+
+    {% set value = 'no spaces' %}
+    {#- No leading/trailing whitespace -#}
+
+    <li>    {{- value }}    </li>
+    <li>    {{ value -}}    </li>
+    <li>    {{- value -}}    </li>
+
+
+
+</div>
+
+
+
+</div> <!-- /container -->
+
+{% include 'footer.twig' %}
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/holder.js"></script>
+</body>
+</html>
