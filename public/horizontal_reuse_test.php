@@ -6,10 +6,12 @@ Twig_Autoloader::register();
 $loader = new Twig_Loader_Filesystem($_SERVER['DOCUMENT_ROOT']."/../tpl");
 $twig = new Twig_Environment($loader, array(
     //'cache' => $_SERVER['DOCUMENT_ROOT']."/../cache",
+    //'debug' => true,
 ));
 
 
-echo $twig->render('child.twig',
+
+echo $twig->render('horizontal_reuse_test.twig',
                         array(
 
                         )

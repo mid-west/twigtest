@@ -7,7 +7,27 @@
 </style>
 {% endblock %}
 {% block content %}
-    <p>ついかmae</p>
-    {{ parent() }}
-    <p>ついか</p>
+    <h2>extends</h2>
+    <p>別のテンプレートを拡張する。extendsタグが冒頭になければならない。</p>
+    <p>childにfooterの指定はしていないが、親であるbase.twigのものが反映されている</p>
 {% endblock %}
+
+
+{% block pagebottom01 %}
+    <h3>上書き</h3>
+    <p>内部要素が完全に置き換わる。</p>
+
+{% endblock %}
+
+{% block pagebottom02 %}
+    <h3>追加</h3>
+    <p>親のものの前に追加</p>
+    {{ parent() }}<br /><br /><br />
+{% endblock pagebottom02 %}
+
+{% block pagebottom03 %}
+    {{ parent() }}
+    <h3>追加</h3>
+    <p>親のものの後に追加</p>
+{% endblock pagebottom03 %}
+

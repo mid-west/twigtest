@@ -1,0 +1,27 @@
+{% extends "child.twig" %}
+
+{% block head %}
+    {{ parent() }}
+    <style type="text/css">
+        .important { color: red; }
+    </style>
+{% endblock %}
+{% block content %}
+
+{% endblock %}
+
+
+{% block pagebottom01 %}
+    test01
+
+{% endblock pagebottom01 %}
+
+{% block pagebottom02 %}
+    test02
+{% endblock pagebottom02 %}
+
+{% block pagebottom03 %}
+    {{ parent() }}
+    <h3>追加</h3>
+    <p>親のものの後にさらに追加</p>
+{% endblock pagebottom03 %}

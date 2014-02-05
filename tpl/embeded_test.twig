@@ -1,0 +1,51 @@
+{% extends "base.twig" %}
+
+{% block head %}
+{{ parent() }}
+<style type="text/css">
+    .important { color: red; }
+</style>
+{% endblock %}
+{% block content %}
+    <div>
+        <h2>embeded!</h2>
+        <p>embededの構造を読み込んだ上で、同じ構造のblockの中身は現状維持？（読み込み元のデータに置き換え）</p>
+        <p>全ページ共通のページ下部バナー、特定ページのみ違うものを読み込む際に使えるか？</p><br /><br />
+        <div>
+            <h3>通常：</h3>
+        {% embed "embeded_box.twig" %}
+            {% block top %}
+                embeded_test fot top!!!!!<br />
+            {% endblock %}
+            {% block bottom %}
+                embeded_test for bottom!!!!!
+            {% endblock %}
+        {% endembed %}
+        </div><br /><br />
+
+
+        <div>
+            <h3>片方、中身空白</h3>
+            <p>⇒空白で上書き（embededの中身は消える）</p>
+            {% embed "embeded_box.twig" %}
+                {% block top %}
+
+                {% endblock %}
+                {% block bottom %}
+                    embeded_test for bottom!!!!!
+                {% endblock %}
+            {% endembed %}
+        </div>
+
+        <div>
+            <h3>blocktopをそもそもなくす</h3>
+            <p>⇒blocktopはそのまま出力され、bottom中身のみ置き換わる</p>
+            {% embed "embeded_box.twig" %}
+
+                {% block bottom %}
+                    embeded_test for bottom!!!!!
+                {% endblock %}
+            {% endembed %}
+        </div>
+    </div>
+{% endblock %}

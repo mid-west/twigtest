@@ -41,7 +41,7 @@
 {% set foo3 = {'foo': 'bar'} %}
     <br />
 {{ foo1 }}<br />
-{{ foo2.1 }}<br />
+{{ foo2.0 }}<br />
 {{ foo3.foo }}
 </div>
 
@@ -140,6 +140,37 @@
 </div>
 
 <div class="well">
+    <h2>ternary operator</h2>
+    <p>三項演算子？ fooがなにか定義されていたらyes</p>
+
+    {{ foo ? 'yes' : 'no' }}<br />
+    {# as of Twig 1.12.0 #}
+    {{ foo ?: 'no' }} is the same as {{ foo ? foo : 'no' }}<br />
+    {{ foo ? 'yes' }} is the same as {{ foo ? 'yes' : '' }}
+
+</div>
+
+<div class="well">
+    <h2>Comparisons</h2>
+    <p>比較演算子？</p>
+    {% if 'Fabien' starts with 'F' %}
+        starts!
+    {% endif %}
+    {% if 'Fabien' ends with 'n' %}
+        ends
+    {% endif %}
+
+</div>
+
+<div class="well">
+    <h2>Containment Operator</h2>
+    <p>文字列を含んでいたら1を返す</p>
+    {# returns true #}
+    {{1 in [1,2,3]}}
+    {{ 'cdefg' in 'abcde' }}
+</div>
+
+<div class="well">
     <h2>String Interpolation</h2>
     <!-- 途中で式の評価を行う -->
     {% set bar = 'rab' %}
@@ -167,11 +198,33 @@
     <li>    {{ value -}}    </li>
     <li>    {{- value -}}    </li>
 
+</div>
 
+<div class="well">
+    <h2>devs</h2>
+    {% set foooo = "Twig<br />" %}
+    {{ foooo ? "定義されています！<br />" : "なにも入ってない？<br />" }} {# won't be escaped #}
+    {% set text = "Twig!!<br />" %}
+    {{ foooo ? text : "<br />その2" }} {# will be escaped #}
+    {% set text = "Twig!!!!!<br />" %}
+    {{ foooo ? text|raw : "<br />その3" }} {# won't be escaped #}
+    {% set text = "Twig......<br />" %}
+    {{ foooo ? text|escape : "<br />その4" }} {# the result of the expression won't be
+escaped #}<br /><br /><br />
+    <p>Escaping is applied before printing, after any other filter is applied:</p>
+    <p>エスケープは画面表示前、ほかのフィルターが適用された後に評価される。<be />
+        よって、dev02|upperと、dev02|upper|escapeは等価</p>
+    {% set dev02 = "dev02" %}
+    {{ dev02|upper }} {# is equivalent to {{ var|upper|escape }} #}<br /><br />
+    <p>The raw filter should only be used at the end of the filter chain:</p>
+    <p>rawフィルターは連続したフィルターの最後に用いられるべき</p>
+    {% set dev03 = "<span>dev03</span>" %}
+    {{ dev03|raw|upper }} {# will be escaped #}<br />
+    {{ dev03|upper|raw }} {# won't be escaped #}
 
 </div>
 
-
+    {% set hensuu = '変数9' %}
 
 </div> <!-- /container -->
 
